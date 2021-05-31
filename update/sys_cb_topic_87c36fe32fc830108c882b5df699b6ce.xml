@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability>(function execute() {
+    var gr = new GlideRecord('incident');
+    return gr.canCreate();
+})()
+</applicability>
+        <applicability_mode>script</applicability_mode>
+        <auto_resolution_enabled>false</auto_resolution_enabled>
+        <category>3efd22da0b203300a1b16c2367673a10</category>
+        <channels/>
+        <connect_queue/>
+        <description>ITSM conversation for creating incidents using Record Producer</description>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <graph>{"graph_api_version":"1.0.31","variables":{"d59d3c68e0dc4d01a19695e75050800b":{"id":"d59d3c68e0dc4d01a19695e75050800b","name":"LiveAgent_application","value":{"mode":"simple","value":""},"varType":"script","category":"vaVars"},"be188a16ea06448290e217298385de02":{"category":"vaInputs","id":"be188a16ea06448290e217298385de02","label":"User","name":"user","table":"sys_user","varType":"reference"},"a514bec69f3a407faa803e22ff6511a8":{"id":"a514bec69f3a407faa803e22ff6511a8","value":{"mode":"script","value":"(function execute() {\n    return gs.getProperty('glide.servlet.uri');\n})()"},"name":"baseUri","label":"baseUri","varType":"script","category":"vaVars"},"2f9b833ef26945ea95e6fa46bbd94d73":{"id":"2f9b833ef26945ea95e6fa46bbd94d73","value":{"mode":"script","value":"(function execute() {\n    if (vaContext.deviceType == 'ios' || vaContext.deviceType == 'android')\n        return 'mesp';\n\n    return gs.getProperty('sn_itsm_va.com.snc.itsm.virtualagent.portal_url');\n})()"},"name":"portalName","label":"portalName","varType":"script","category":"vaVars"},"0d78da90fc914caa8d1c76dbb771bf91":{"id":"0d78da90fc914caa8d1c76dbb771bf91","name":"record_id","label":"Record_id","defaultValue":"record_id","varType":"string","category":"vaInputs","metadata":{"libraryMappingType":"output"}},"de7a92697f374fa39672bf1a8368c857":{"id":"de7a92697f374fa39672bf1a8368c857","name":"record_table","label":"Record_table","defaultValue":"record_table","varType":"string","category":"vaInputs","metadata":{"libraryMappingType":"output"}},"af834406908547d7ba962ba02d20c391":{"id":"af834406908547d7ba962ba02d20c391","name":"variables","label":"Variables","defaultValue":"variables","varType":"string","category":"vaInputs","metadata":{"libraryMappingType":"output"}}},"goals":{"primary":{"id":"primary","trigger":{"type":"primary"},"name":"primary","applicability":"","description":"","nodes":{"61c87a8c3302496796b717476be0c9f9":{"id":"61c87a8c3302496796b717476be0c9f9","stepType":"Start","name":"Start","greetingResponse":{"mode":"simple","value":""}},"f69f03318b014fab91e27488d43b9cf6":{"id":"f69f03318b014fab91e27488d43b9cf6","stepType":"TerminateGoal","name":"End","confirmationMessage":{"mode":"simple","value":""}},"6ed80a4f557c4641b16e82fb179965ff":{"id":"6ed80a4f557c4641b16e82fb179965ff","stepType":"ReusableTopic","name":"Request Catalog Item","fields":[],"reusableTopicChoice":"Request Catalog Item","reusableTopicId":"a39acd71c3a3330012d1758a7ff57eb6","inputs":{"catalog_item_id":{"value":[{"type":"paragraph","children":[{"text":""},{"text":"9531047253230010fa75ddeeff7b1262"},{"text":""}]}],"mode":"simple"},"execute_contextual_search":{"value":[{"type":"paragraph","children":[{"text":""},{"text":"true"},{"text":""}]}],"mode":"simple"},"confirm_catalog_item":{"value":[{"type":"paragraph","children":[{"text":""},{"text":"false"},{"text":""}]}],"mode":"simple"}},"outputs":[{"id":"0d78da90fc914caa8d1c76dbb771bf91","value":"record_id","mapping":"record_id","preventDisable":true},{"id":"de7a92697f374fa39672bf1a8368c857","value":"record_table","mapping":"record_table","preventDisable":true},{"id":"af834406908547d7ba962ba02d20c391","value":"variables","mapping":"variables","preventDisable":false}],"variableIds":["0d78da90fc914caa8d1c76dbb771bf91","de7a92697f374fa39672bf1a8368c857","af834406908547d7ba962ba02d20c391"],"outdatedNote":false,"applicability":{"value":"","mode":"query"}},"70facb8fb6874e59b6a84b695da34024":{"id":"70facb8fb6874e59b6a84b695da34024","stepType":"Decision","name":"Decision"},"e2484ada90e740e39351b6b445d19daa":{"id":"e2484ada90e740e39351b6b445d19daa","stepType":"TextOutput","name":"Request Complete Message","value":{"value":[{"type":"paragraph","children":[{"text":""},{"text":"Your request has been submitted. Here are the details :"},{"text":""}]}],"mode":"simple"},"applicability":{"value":"","mode":"query"},"secure":false},"07c29adf264042f49018c683640403ff":{"id":"07c29adf264042f49018c683640403ff","stepType":"LinkOutput","name":"Inserted Record Link","url":{"value":"(function execute() {\n    var tableName = vaInputs.record_table.getValue();\n    var recordId = vaInputs.record_id.getValue();\n    return vaVars.baseUri + vaVars.portalName + \"?id=form&amp;table=\"+ tableName  + \"&amp;sys_id=\" + recordId;\n})()\n","mode":"script"},"label":{"value":"(function execute() {\n    var message = '';\n    var gr = new GlideRecord(vaInputs.record_table.getValue());\n    if (gr.get(vaInputs.record_id.getValue()))\n        message = gs.getMessage('View submitted request ({0})', gr.getDisplayValue(gr.getDisplayName()));\n\n    return message;\n})()\n","mode":"script"},"header":{"value":"(function execute() {\n    return '';\n})()\n","mode":"script"},"applicability":{"value":"","mode":"query"},"linkType":"single","introMsg":{"value":"","mode":"simple"},"listOfLinks":""}},"edges":[{"id":"ea72d47f51374fc2aa901f6377786645","edgeType":"Edge","source":"61c87a8c3302496796b717476be0c9f9","target":"6ed80a4f557c4641b16e82fb179965ff","sourcePort":"","targetPort":""},{"id":"8264ae65c58f420bb359a55bcb4828e0","edgeType":"Edge","source":"6ed80a4f557c4641b16e82fb179965ff","target":"70facb8fb6874e59b6a84b695da34024","sourcePort":"","targetPort":""},{"id":"b795eaab4e9d4d2e9f3132cd8e85814a","edgeType":"Branch","source":"70facb8fb6874e59b6a84b695da34024","target":"f69f03318b014fab91e27488d43b9cf6","sourcePort":"","targetPort":"","expression":{"value":"record_idEMPTYSTRING","mode":"query"},"label":"Catalog Request Not Complete"},{"id":"83a14f0390be4f90a7ce2cd18ae629a6","edgeType":"Branch","source":"70facb8fb6874e59b6a84b695da34024","target":"e2484ada90e740e39351b6b445d19daa","sourcePort":"","targetPort":"","expression":{"mode":"script","value":"(function execute() {\n    return !!vaInputs.record_id.getValue() &amp;&amp; vaInputs.record_id.getValue() != '-1';\n})()\n"},"label":"Catalog Request Complete"},{"id":"d2bc779dc1214c31b1f52cfc7b462cf4","edgeType":"Edge","source":"e2484ada90e740e39351b6b445d19daa","target":"07c29adf264042f49018c683640403ff","sourcePort":"","targetPort":""},{"id":"1edc4e5da15743468e75e6b25b3857b0","edgeType":"Edge","source":"07c29adf264042f49018c683640403ff","target":"f69f03318b014fab91e27488d43b9cf6","sourcePort":"","targetPort":""}]}}}</graph>
+        <key_phrases>Report IT Issue,Report IT Issue,create,open,incident,ticket,issue,broken,help,IT</key_phrases>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <name>Report IT Issue</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider/>
+        <roles/>
+        <source_topic_id>3b12f20b53630010fa75ddeeff7b12bf</source_topic_id>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-05-17 13:05:55</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>87c36fe32fc830108c882b5df699b6ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Report IT Issue</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_cb_topic_87c36fe32fc830108c882b5df699b6ce</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-05-17 13:05:55</sys_updated_on>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+        <variables/>
+    </sys_cb_topic>
+    <sys_variable_value action="delete_multiple" query="document_key=87c36fe32fc830108c882b5df699b6ce"/>
+</record_update>
